@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+
+    <div class="main" >
+        <h2 class="title">Boxes</h2>
+        <div class="game">
+            <div :class="{x : el == 1, o: el == -1}" class="random" v-for="(el, idx) in list" @click="met(idx)"></div>
+            <div v-if="winner == 1" class="winner winner1">player 1 win</div>
+            <div v-if="winner == -1" class="winner winner-1">player 2 win</div>
+            <div v-if="waiting == 1" class="winner waitngPlayer">ожидание игроков</div>
+        </div>
+        <div v-if="player == 1" class="player player1">Player 1 turn</div>
+        <div v-else class="player player2">Player 2 turn</div>
+        <div class="buttons">
+            <button class="player btn" @click="resetBtn" >reset</button>
+            <button class="player btnRules" @click="rulesOn" >rules</button>
+        </div>
+        <div v-if="rules == 1" class="rules">
+            <div class="rules-text">
+                <span class="rules-title">Правила игры “Коробки”:</span>
+                <span class="rules-bold">1.  Цель игры</span>
+                <span>Крановщики по очереди опускают груз на склад. Кто первый поставит свои 4 коробки в ряд, тот выиграл и следующую его смену отрабатывает проигравший. </span>
+                <span class="rules-bold">2. Механика игры</span>
+                <span>Коробки можно ставить либо на пол, либо на любую другую коробку. </span>
+                <span class="rules-bold">3. Варианты победы</span> 
+                <span>Ряд из 4 коробок считается выигрышными, если 4 коробки подряд касаются друг друга по горизонтали, вертикали или диагонали. </span>
+            </div>
+            <button class="btn rulesOff" @click="rulesOff" >X</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="main.js"></script>
+    
+</body>
+</html>
